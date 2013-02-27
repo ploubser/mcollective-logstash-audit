@@ -5,7 +5,7 @@ easily be consumed by logstash.
 
 [Logstash](http://code.google.com/p/logstash/) is an opensource project that stores log lines and allow you to do full text and meta data based searches on that data.
 
-[picture](/images/mcollective-logstash.png)
+[![mcollective-logstash](images/mcollective-logstash.png)](https://raw.github.com/ploubser/mcollective-logstash-audit/master/images/mcollective-logstash.png)
 
 The image above shows a screenshot of Kibana showing all RPC requests made by a specific client, you can also see meta data for one of the requests.
 
@@ -25,3 +25,19 @@ rpcaudit = 1
 rpcauditprovider = logstash
 plugin.logstash.target = /var/log/mcollective-audit.log
 ```
+
+###Logstash
+
+A possible Logstash shipper configuration might look like this.
+
+```
+input {
+  file {
+    type => 'mcollective-audit'
+    path => '/var/log/mcollective-logstashaudit.log'
+    format => json_event
+  }
+}
+```
+
+This tells the log shipper to fetch audit log entries from the same location that you’ve configured above in the mcollective config.
