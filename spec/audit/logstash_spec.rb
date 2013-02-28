@@ -78,7 +78,7 @@ module MCollective
 
         it 'should log a warning if it cannot write to the target file' do
           File.expects(:open).raises('error')
-          Log.expects(:warn).with('Cannot write to audit file %s: %s', ['/var/log/mcollective-logstashaudit.log','error'])
+          Log.expects(:warn).with('Cannot write to audit file %s: %s', ['/var/log/mcollective-audit.log','error'])
           @audit.audit_request(request, nil)
         end
       end

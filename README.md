@@ -16,14 +16,14 @@ The image above shows a screenshot of Kibana showing all RPC requests made by a 
 
 ###Configuration
 
-There is one plugin configuration setting for the service agent.
+There is one plugin configuration setting.
 
-* target - The json file to write to. Defaults to /var/log/mcollective-logstashaudit.log
+* logfile - The json file to write to. Defaults to /var/log/mcollective-audit.log
 
 ```
 rpcaudit = 1
 rpcauditprovider = logstash
-plugin.logstash.target = /var/log/mcollective-audit.log
+plugin.logstash.logfile = /var/log/mcollective-logstashaudit.log
 ```
 
 ###Logstash
@@ -34,7 +34,7 @@ A possible Logstash shipper configuration might look like this.
 input {
   file {
     type => 'mcollective-audit'
-    path => '/var/log/mcollective-logstashaudit.log'
+    path => '/var/log/mcollective-audit.log'
     format => json_event
   }
 }
